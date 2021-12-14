@@ -1,0 +1,3 @@
+1) default file choose in admin->book edit
+2) count in cart for nullable price
+3) double validation works like shit

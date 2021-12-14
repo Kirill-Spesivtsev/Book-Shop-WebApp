@@ -1,0 +1,8 @@
+﻿@using ASP.Net_Core_Project.ViewModels
+@using ASP.Net_Core_Project.Entities
+@model ListViewModel<Book>
+
+@foreach (var item in Model)
+{
+    <partial name="_ListItemPartial" model="@item" />
+}

@@ -1,0 +1,91 @@
+﻿@page "{id:int}"
+@model ASP.Net_Core_Project.Areas.Admin.Pages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Book.BookId" />
+            <div class="form-group">
+                <label asp-for="Book.Title" class="control-label"></label>
+                <input asp-for="Book.Title" class="form-control" />
+                <span asp-validation-for="Book.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Description" class="control-label"></label>
+                <input asp-for="Book.Description" class="form-control" />
+                <span asp-validation-for="Book.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Pages" class="control-label"></label>
+                <input asp-for="Book.Pages" class="form-control" />
+                <span asp-validation-for="Book.Pages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Price" class="control-label"></label>
+                <input asp-for="Book.Price" class="form-control" />
+                <span asp-validation-for="Book.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @if (!string.IsNullOrEmpty(Model.Book.ImageName))
+                {
+                    <img src=~/Images/products/@Model.Book.ImageName
+                         alt="NoSuchFile" width="150" />
+                    <div class="custom-file mt-3">
+                        <input type="file" class="custom-file-input"
+                               asp-for="Image" id="customFile">
+                        <label class="custom-file-label" for="customFile">
+                            Выберите файл изображения
+                        </label>
+                    </div>
+                }
+                else
+                {
+                    <h6>Файл изображения не задан</h6>
+                    <div class="custom-file mt-3">
+                        <input type="file" class="custom-file-input"
+                               asp-for="Image" id="customFile">
+                        <label class="custom-file-label" for="customFile">
+                            Выберите файл изображения
+                        </label>
+                    </div>
+                }
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.GenreId" class="control-label"></label>
+                <select asp-for="Book.GenreId" class="form-control" asp-items="ViewBag.GenreId"></select>
+                <span asp-validation-for="Book.GenreId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.AuthorId" class="control-label"></label>
+                <select asp-for="Book.AuthorId" class="form-control" asp-items="ViewBag.AuthorId"></select>
+                <span asp-validation-for="Book.AuthorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/bs-custom-file-input.js"></script>
+    <script>
+        $(document).ready(function () { bsCustomFileInput.init() })
+    </script>
+
+}

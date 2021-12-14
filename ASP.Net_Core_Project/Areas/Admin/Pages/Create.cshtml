@@ -1,0 +1,70 @@
+﻿@page
+@model ASP.Net_Core_Project.Areas.Admin.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Book.Title" class="control-label"></label>
+                <input asp-for="Book.Title" class="form-control" />
+                <span asp-validation-for="Book.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Description" class="control-label"></label>
+                <input asp-for="Book.Description" class="form-control" />
+                <span asp-validation-for="Book.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Pages" class="control-label"></label>
+                <input asp-for="Book.Pages" class="form-control" />
+                <span asp-validation-for="Book.Pages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Price" class="control-label"></label>
+                <input asp-for="Book.Price" type="text" class="form-control" />
+                <span asp-validation-for="Book.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.ImageName" class="control-label"></label>
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="Image" class="custom-file-input"
+                           id="customFile">
+                    <label class="custom-file-label"
+                           for="customFile">Выберите файл</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.GenreId" class="control-label">Genre</label>
+                <select asp-for="Book.GenreId" class="form-control" asp-items="ViewBag.GenreId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.AuthorId" class="control-label">Author</label>
+                <select asp-for="Book.AuthorId" class="form-control" asp-items="ViewBag.AuthorId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/bs-custom-file-input.js"></script>
+    <script>
+        bsCustomFileInput.init();
+    </script>
+}

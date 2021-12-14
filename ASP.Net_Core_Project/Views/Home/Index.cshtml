@@ -1,0 +1,149 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@using Microsoft.AspNetCore.Identity;
+@using ASP.Net_Core_Project.Entities;
+@using ASP.Net_Core_Project.ViewModels;
+@using ASP.Net_Core_Project.Controllers
+
+@inject SignInManager<ApplicationUser> signInManager
+
+@model HomeController
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @{
+        ViewData["Title"] = "Лабораторная работа 3";
+    }
+
+    <!--
+    <div class="text-center">
+        <h1 class="display-4">Hello world!</h1>
+    </div>
+
+    -->
+
+    <h1>@ViewData["Text"]</h1>
+
+
+    <h2>
+        Список
+    </h2>
+
+    <ol type="A">
+        @for (int i = 1; i <= 4; i++)
+        {
+            <li>элемент @i списка</li>
+        }
+    </ol>
+
+    <hr />
+    <h2>
+        Форма
+    </h2>
+    <select asp-items="@ViewData["ListData"] as SelectList"></select>
+
+
+
+
+    <form method="post" asp-controller="Home" asp-action="Special" enctype="multipart/form-data">
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkBox1" name="checkBox1">
+                    <label class="form-check-label" for="checkBox1">
+                        Чек-бокс 1
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkBox2" name="checkBox2">
+                    <label class="form-check-label" for="checkBox2">
+                        Чек-бокс 2
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <fieldset class="form-group container row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <div class="row px-3">
+                    <div class="form-check px-3">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            Радио-1
+                        </label>
+                    </div>
+                    <div class="form-check px-3">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                        <label class="form-check-label" for="gridRadios2">
+                            Радио-2
+                        </label>
+                    </div>
+                    <div class="form-check px-3">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                        <label class="form-check-label" for="gridRadios3">
+                            Радио-3
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        @if (signInManager.IsSignedIn(User))
+        {
+            <div class="form-group">
+                <label asp-for="avatar"></label>
+                <div class="custom-file">
+                    <input asp-for="avatar" type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Выберите файл</label>
+                </div>
+            </div>
+        }
+
+        <div class="form-group row">
+            <label for="inputLogin1" class="col-sm-2 col-form-label">Логин</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLogin1" name="Login" placeholder="Введите имя">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputPassword1" class="col-sm-2 col-form-label">Пароль</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword1" name="Password" placeholder="Введите пароль">
+            </div>
+        </div>
+
+
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+@section Scripts
+{
+    <script src="~/lib/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+    <script>
+        $(document).ready(function () { bsCustomFileInput.init() })
+    </script>
+}

@@ -1,0 +1,47 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+
+
+header{
+    background-color: #343a40;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #343a40;
+}
+
+.nav-color {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.content {
+    padding-bottom: 90px;
+}
+
+.wrapper {
+    position: relative;
+    min-height: 100%;
+}
+
+navHeader {
+    white-space: nowrap;
+    height: 60px;
+}
+
+#navbarDropdownMenuLink {
+    cursor: pointer;
+}
+
+.paginatorStd {
+    margin-top:40px;
+    float:right;
+}
+
+.iconButton {
+    margin: 2px;
+}
