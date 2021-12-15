@@ -16,6 +16,9 @@ using Microsoft.AspNetCore.Mvc;
 using ASP.Net_Core_Project.Entities;
 using ASP.Net_Core_Project.Helpers;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using ASP.Net_Core_Project.Services;
+using ASP.Net_Core_Project.Models;
 
 namespace ASP.Net_Core_Project
 {
@@ -58,6 +61,9 @@ namespace ASP.Net_Core_Project
                 opt.Cookie.HttpOnly = true;
                 opt.Cookie.IsEssential = true;
             });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<Cart>(sp => CartService.GetCart(sp));
 
             services.AddControllersWithViews();
             services.AddRazorPages();

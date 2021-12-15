@@ -8,10 +8,10 @@ namespace ASP.Net_Core_Project.Models
 {
     public class Cart
     {
-        public Dictionary<int, CartItem> Items { get; set; }
+        public Dictionary<string, CartItem> Items { get; set; }
         public Cart()
         {
-            Items = new Dictionary<int, CartItem>();
+            Items = new Dictionary<string, CartItem>();
         }
 
         public int Count
@@ -32,10 +32,10 @@ namespace ASP.Net_Core_Project.Models
         
         public virtual void AddToCart(Book book)
         {
-            if (Items.ContainsKey(book.BookId))
-                Items[book.BookId].Quantity++;
+            if (Items.ContainsKey(book.BookId.ToString()))
+                Items[book.BookId.ToString()].Quantity++;
             else
-                Items.Add(book.BookId, new CartItem
+                Items.Add(book.BookId.ToString(), new CartItem
                 {
                     Book = book,
                     Quantity = 1
@@ -44,7 +44,7 @@ namespace ASP.Net_Core_Project.Models
 
         public virtual void RemoveFromCart(int id)
         {
-            Items.Remove(id);
+            Items.Remove(id.ToString());
         }
         public virtual void ClearAll()
         {

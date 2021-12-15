@@ -14,20 +14,22 @@ namespace ASP.Net_Core_Project.Controllers
     public class CartController : Controller
     {
         private ApplicationDbContext _context;
+        private Cart _cart;
         private string cartKey = "cart";
-        public CartController(ApplicationDbContext context)
+        public CartController(ApplicationDbContext context, Cart cart)
         {
             _context = context;
+            _cart = cart;
         }
         public IActionResult Index()
         {
-            var _cart = HttpContext.Session.Get<Cart>(cartKey);
+            _cart = HttpContext.Session.Get<Cart>(cartKey);
             return View(_cart.Items.Values);
         }
         [Authorize]
         public IActionResult Add(int id, string returnUrl)
         {
-            var _cart = HttpContext.Session.Get<Cart>(cartKey);
+            _cart = HttpContext.Session.Get<Cart>(cartKey);
             var item = _context.Books.Find(id);
             if (item != null)
             {

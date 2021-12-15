@@ -19,7 +19,7 @@ namespace ASP.Net_Core_Project.Extensions
         {
             var item = session.GetString(key);
             return item == null
-                ? default(T)
+                ? Activator.CreateInstance<T>()
                 : JsonSerializer.Deserialize<T>(item);
         }
     }
