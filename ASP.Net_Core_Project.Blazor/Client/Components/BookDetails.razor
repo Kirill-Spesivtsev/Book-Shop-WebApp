@@ -1,0 +1,23 @@
+﻿@if (Book != null)
+{
+    <img src="@imageSrc" class="img-thumbnail" width="150" />
+    <div>
+        <p>@Book.Title - @Book.Description</p> 
+        <div class="badge badge-info ">@Book.Pages страниц</div>
+    </div>
+}
+
+@code 
+{
+    [Parameter]
+    public DetailsViewModel Book { get; set; }
+    [Parameter]
+    public EventCallback<DetailsViewModel> BookChanged { get; set; }
+    string imageSrc
+    {
+        get
+        {
+            return $"images/products/{Book.ImageName}";
+        }
+    } 
+}

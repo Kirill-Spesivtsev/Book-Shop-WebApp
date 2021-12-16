@@ -1,0 +1,32 @@
+﻿@using ASP.Net_Core_Project.Blazor.Client.Components
+@page "/apidemo" 
+
+@inject HttpClient client
+
+    <div class="container">
+        <h3>Список книг</h3>
+    </div>
+
+    <div class="container">
+        <BooksList @bind-Books="@Books"
+                   SelectedObjectChanged="ShowDetails">
+        </BooksList>
+        <BookDetails @bind-Book="SelectedBook"></BookDetails>
+    </div>
+@code 
+{
+    [Parameter]
+    public IEnumerable<ListViewModel> Books { get; set; }
+    public DetailsViewModel SelectedBook { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Books = await client.GetFromJsonAsync<IEnumerable<ListViewModel>>("api/books");
+    }
+    private async Task ShowDetails(int id)
+    {
+        SelectedBook = await
+        client.GetFromJsonAsync<DetailsViewModel>($"api/books/{id}");
+    }
+}
+

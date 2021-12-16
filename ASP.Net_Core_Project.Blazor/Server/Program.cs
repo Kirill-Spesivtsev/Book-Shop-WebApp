@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ASP.Net_Core_Project
+namespace ASP.Net_Core_Project.Blazor.Server
 {
     public class Program
     {
@@ -21,11 +21,6 @@ namespace ASP.Net_Core_Project
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-            .ConfigureLogging(lp =>
-            {
-                lp.ClearProviders();
-                lp.AddFilter("Microsoft", LogLevel.None);
-            });
+                });
     }
 }

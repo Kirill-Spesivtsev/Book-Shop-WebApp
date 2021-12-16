@@ -15,15 +15,14 @@ namespace ASP.Net_Core_Project.Controllers
     {
 
         private readonly ILogger<ProductController> _logger;
-        ApplicationDbContext _context;
-
+        private ApplicationDbContext _context;
         private int _pageSize;
 
 
         public ProductController(ApplicationDbContext context, ILogger<ProductController> logger)
         {
             _context = context;
-            logger = _logger;
+            _logger = logger;
             _pageSize = 4;
         }
 
@@ -34,6 +33,9 @@ namespace ASP.Net_Core_Project.Controllers
             ViewData["Genres"] = _context.BookGenres;
             ViewData["CurrentGenre"] = genre ?? 0;
             ViewData["PageSize"] = _pageSize;
+
+
+            //_logger.LogInformation($"info: group={genre}, page={pageNumber}");
 
             var booksFiltered = _context.Books
                 .Where(d => !genre.HasValue || d.GenreId == genre.Value);

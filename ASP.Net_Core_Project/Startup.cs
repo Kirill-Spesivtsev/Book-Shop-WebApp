@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using ASP.Net_Core_Project.Services;
 using ASP.Net_Core_Project.Models;
+using ASP.Net_Core_Project.Extensions;
 
 namespace ASP.Net_Core_Project
 {
@@ -71,7 +72,7 @@ namespace ASP.Net_Core_Project
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context,
-                UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+                UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ILoggerFactory logger)
         {
 
             if (env.IsDevelopment())
@@ -93,6 +94,9 @@ namespace ASP.Net_Core_Project
             app.UseAuthentication();
             app.UseSession();
             app.UseAuthorization();
+
+            logger.AddFile("Logs/log-{Date}.txt");
+            app.UseFileLogging();
 
             DBInitializer.DBInit(context, userManager, roleManager).Wait();
 
